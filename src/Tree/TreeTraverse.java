@@ -9,6 +9,12 @@ public class TreeTraverse {
 
         preOrderIterative(getRootNode());
         System.out.println();
+
+        inOrderTraverseRecursively(getRootNode());
+        System.out.println();
+
+        inOrderIterative(getRootNode());
+        System.out.println();
     }
 
     private static TreeNode getRootNode() {
@@ -58,5 +64,28 @@ public class TreeTraverse {
         System.out.print(root.value + " ");
         preOrderTraverseRecursively(root.left);
         preOrderTraverseRecursively(root.right);
+    }
+
+    private static void inOrderTraverseRecursively(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        inOrderTraverseRecursively(root.left);
+        System.out.print(root.value + " ");
+        inOrderTraverseRecursively(root.right);
+    }
+
+    private static void inOrderIterative(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        while (!stack.isEmpty() || root != null) {
+            if (root != null) {
+                stack.push(root);
+                root = root.left;
+            } else {
+                TreeNode visited = stack.pop();
+                System.out.print(visited.value + " ");
+                root = visited.right;
+            }
+        }
     }
 }
