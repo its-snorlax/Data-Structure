@@ -1,5 +1,7 @@
 package Tree;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 public class TreeTraverse {
@@ -20,6 +22,9 @@ public class TreeTraverse {
         System.out.println();
 
         postOrderIterative(getRootNode());
+        System.out.println();
+
+        breadthFirstSearch(getRootNode());
         System.out.println();
     }
 
@@ -124,5 +129,21 @@ public class TreeTraverse {
             }
         }
 
+    }
+
+    private static void breadthFirstSearch(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            TreeNode visit = queue.remove();
+            System.out.print(visit.value + " ");
+
+            if (visit.left != null) {
+                queue.add(visit.left);
+            }
+            if (visit.right != null) {
+                queue.add(visit.right);
+            }
+        }
     }
 }
