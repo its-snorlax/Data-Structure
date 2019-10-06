@@ -15,6 +15,12 @@ public class TreeTraverse {
 
         inOrderIterative(getRootNode());
         System.out.println();
+
+        postOrderTraverseRecursively(getRootNode());
+        System.out.println();
+
+        postOrderIterative(getRootNode());
+        System.out.println();
     }
 
     private static TreeNode getRootNode() {
@@ -87,5 +93,36 @@ public class TreeTraverse {
                 root = visited.right;
             }
         }
+    }
+
+    private static void postOrderTraverseRecursively(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        postOrderTraverseRecursively(root.left);
+        postOrderTraverseRecursively(root.right);
+        System.out.print(root.value + " ");
+
+    }
+
+    private static void postOrderIterative(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode lastVisited = null;
+
+        while (!stack.isEmpty() || root != null) {
+            if (root != null) {
+                stack.push(root);
+                root = root.left;
+            } else {
+                TreeNode peek = stack.peek();
+                if (peek.right != null && lastVisited != peek.right) {
+                    root = peek.right;
+                } else {
+                    System.out.print(peek.value + " ");
+                    lastVisited = stack.pop();
+                }
+            }
+        }
+
     }
 }
