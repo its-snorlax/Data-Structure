@@ -11,7 +11,7 @@ class QuickSort {
 
     private static void sort(int[] inputs, int low, int high) {
         if (low < high) {
-            int partition = partitioning(inputs, low, high);
+            int partition = partitioningGeekForGeeks(inputs, low, high);
             sort(inputs, low, partition - 1);
             sort(inputs, partition + 1, high);
         }
@@ -38,6 +38,18 @@ class QuickSort {
         return j;
     }
 
+    private static int partitioningGeekForGeeks(int[] input, int low, int high) {
+        int pivot = input[high];
+        int i = low - 1;
+
+        for (int j = low; j < high; j++) {
+            if (input[j] < pivot) {
+                swap(input, ++i, j);
+            }
+        }
+        swap(input, i + 1, high);
+        return i + 1;
+    }
 
     private static void swap(int[] inputs, int i, int j) {
         int temp = inputs[i];
